@@ -70,6 +70,7 @@ export const getCartByUserId = async (req, res) => {
       size: item.attributeValue.name,
       attribute: item.attribute._id,
       attributeValue: item.attributeValue._id,
+      _id: item._id,
     }));
 
     // console.log(cartData);
@@ -147,6 +148,7 @@ export const updateProductQuantity = async (req, res) => {
 
 export const increaseProductQuantity = async (req, res) => {
   const { userId, product } = req.body;
+
   try {
     let cart = await Cart.findOne({ userId });
     if (!cart) {
@@ -156,13 +158,15 @@ export const increaseProductQuantity = async (req, res) => {
     }
 
     const productIncrese = cart.products.find(
-      (item) => item.product.toString() === product
+      (item) => item._id.toString() === product
     );
     if (!productIncrese) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ error: "Product not found" });
     }
+
+    console.log(productIncrese);
 
     productIncrese.quantity++;
 
@@ -186,7 +190,7 @@ export const decreaseProductQuantity = async (req, res) => {
     }
 
     const productIncrese = cart.products.find(
-      (item) => item.product.toString() === product
+      (item) => item._id.toString() === product
     );
     if (!productIncrese) {
       return res

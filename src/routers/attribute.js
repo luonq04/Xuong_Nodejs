@@ -8,6 +8,8 @@ import {
   getAllAttributes,
   getAttributeById,
   updateAttribute,
+  getValueAttributeById,
+  updateValueAttribute,
 } from "../controllers/attribute";
 
 const router = Router();
@@ -34,5 +36,9 @@ router.delete("/attributes/:id", deleteAttribute);
 
 // Route để xóa một giá trị theo ID (value)
 router.delete("/attributes/:id/values", deleteValueAttribute);
+
+// values attribute
+router.get("/attributeValues/:id", getValueAttributeById);
+router.put("/attributeValues/:id", updateValueAttribute);
 
 export default router;
