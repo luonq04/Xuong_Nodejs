@@ -80,11 +80,17 @@ export const updateAttribute = async (req, res) => {
 // Controller để xóa một thuộc tính
 export const deleteAttribute = async (req, res) => {
   try {
-    const attribute = await Attribute.findById(req.params.id);
+    console.log("PARAM", req.params.id);
+
+    const attribute = await Attribute.findByIdAndDelete(req.params.id);
+
+    console.log("ATTRIBUTE", attribute);
+    // return;
+
     if (!attribute) {
       return res.status(404).json({ message: "Attribute not found" });
     }
-    await attribute.remove();
+
     res.json({ message: "Attribute deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -96,15 +102,13 @@ export const deleteAttribute = async (req, res) => {
 // Controller để tạo mới một giá trị của thuộc tính
 export const createValueAttribute = async (req, res) => {
   try {
-    const { name, price, quantity, color } = req.body;
+    const { name, color } = req.body;
     const attribute = await Attribute.findById(req.params.id);
     if (!attribute) {
       return res.status(404).json({ message: "Attribute not found" });
     }
     const valueAttribute = new ValueAttributeModel({
       name,
-      price,
-      quantity,
       color,
     });
     const newValueAttribute = await valueAttribute.save();
@@ -142,14 +146,12 @@ export const getValueAttributeById = async (req, res) => {
 // Controller để cập nhật một giá trị của thuộc tính
 export const updateValueAttribute = async (req, res) => {
   try {
-    const { name, price, quantity, color } = req.body;
+    const { name, color } = req.body;
     const value = await ValueAttributeModel.findById(req.params.id);
     if (!value) {
       return res.status(404).json({ message: "ValueAttribute not found" });
     }
     value.name = name;
-    value.price = price;
-    value.quantity = quantity;
     value.color = color;
     const updatedValue = await value.save();
     res.json(updatedValue);

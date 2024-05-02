@@ -39,6 +39,7 @@ router.delete("/attributes/:id/values", deleteValueAttribute);
 
 // values attribute
 router.get("/attributeValues/:id", getValueAttributeById);
+
 router.put("/attributeValues/:id", updateValueAttribute);
 
 export default router;

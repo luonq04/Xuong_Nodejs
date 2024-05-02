@@ -65,7 +65,7 @@ export const getCartByUserId = async (req, res) => {
       name: item.product.name,
       quantity: item.quantity,
       image: item.product.image,
-      price: item.attributeValue.price,
+      // price: item.attributeValue.price,
       color: item.attributeValue.color,
       size: item.attributeValue.name,
       attribute: item.attribute._id,
@@ -73,7 +73,7 @@ export const getCartByUserId = async (req, res) => {
       _id: item._id,
     }));
 
-    // console.log(cartData);
+    console.log("Cart Data", cartData);
 
     return res.status(StatusCodes.OK).json(cartData);
   } catch (error) {

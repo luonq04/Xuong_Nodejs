@@ -20,15 +20,15 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
-    price: {
-      type: Number,
-      required: true,
-    },
+    // price: {
+    //   type: Number,
+    //   required: true,
+    // },
 
-    sale: {
-      type: Number,
-      default: 0,
-    },
+    // sale: {
+    //   type: Number,
+    //   default: 0,
+    // },
 
     description: {
       type: String,
